@@ -111,7 +111,7 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 
 
 // method that plays the Game of MegaWar
-void Game() {
+void Game(int &decks, int& numberOfPlayers) {
 	bool game = true;
 	int totalBattles = 0;
 
@@ -128,23 +128,15 @@ void Game() {
 
 
 	vector<Player>::iterator playerITR;
-	int decks;
-	int numberOfPlayers;
+	
+	int sizeOfMegaPile;
 	vector<Player> players;
 	LostAndFoundPile lostAndFound = LostAndFoundPile();
 	WarPile warPile = WarPile();
 	map<int, Card> CardToPlayer;
 
 
-	// =============== INITIALIZING THE PLAYERS, DECKS, AND CARD DISTRIBUTION ================
-
-	cout << "How many decks do you want? ";
-	cin >> decks;
-	cout << endl;
-
-	cout << "How many players do you want? ";
-	cin >> numberOfPlayers;
-	cout << endl;
+	
 
 	// places the Player object into the players vector
 	for (int i = 0; i < numberOfPlayers; i++) {
@@ -154,6 +146,7 @@ void Game() {
 	// creates the megaDeck and shuffles it
 	MegaDeck megaDeck(decks);
 	megaDeck.shuffle();
+	sizeOfMegaPile = megaDeck.getSizeOfPile();
 
 	// if the cards cannot be evenly divided to the players, remove cards until it can and add them to the lostAndFound pile.
 	while (megaDeck.getSizeOfPile() % numberOfPlayers != 0) {
@@ -176,10 +169,22 @@ void Game() {
 	// =================== THE ACTUAL GAME PART OF WAR =======================
 	// game ends when every player but 1's pile == 0;
 	// if we have p1 p2 p3 p4 and p3 lose, make sure to keep printing their stats but make sure to never remove cards from their pile
-	for (int i = 0; i < 10; i++){
+	// player wins the game one person has EVERY card in the deck.
+	while(game){
+		for (auto player : players) {
+			if (player.getSizeOfPile() == sizeOfMegaPile) {
+				cout << "=============== WE HAVE A WINNER ===============" << endl;
+				cout << "player: " << player.getPlayerID() << " wins!" << endl;
+				return;
+			}
+		}
+
+
 		Card maxCard;
 		vector<int> playersIDWithMaxCard;
-		cout << "Battle: " << totalBattles << endl;
+
+		
+		cout << "Battle: " << ++totalBattles << endl;
 		for (playerITR = players.begin(); playerITR != players.end(); playerITR++) {
 
 			// each key (player) can now be mapped to a value (Card)
@@ -199,20 +204,35 @@ void Game() {
 		// after making all eligible players place a card, start the WAR process
 		while (CardToPlayer.size() != 0) {
 			// cout << "initiating war" << endl;
+			// NEED TO TEST WHEN A PLAYER RUNS OUT OF CARDS!
 			War(CardToPlayer, maxCard, playersIDWithMaxCard, playerITR, players, warPile, lostAndFound);
 		}
 		
 
 
-		++totalBattles;
+		
 	}
 }
 
 
 
 int main() {
+	int decks;
+	int numberOfPlayers;
+	int input;
 
-	Game();
+	// =============== INITIALIZING THE PLAYERS, DECKS, AND CARD DISTRIBUTION ================
+
+	cout << "How many decks do you want? ";
+	cin >> decks;
+	cout << endl;
+
+	cout << "How many players do you want? ";
+	cin >> numberOfPlayers;
+	cout << endl;
+
+	Game(decks, numberOfPlayers);
+	
 
 	return 0;
 }
