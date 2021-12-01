@@ -21,6 +21,8 @@ public:
 	void printStats();
 	double getFierceness();
 	int getPlayerID();
+	void incrementWin();
+	void incrementBattles();
 };
 
 #endif // !PLAYER_H

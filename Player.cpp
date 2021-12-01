@@ -40,6 +40,13 @@ int Player::getPlayerID() {
 	return playerID;
 }
 
+void Player::incrementBattles() {
+	battles++;
+}
+
+void Player::incrementWin() {
+	wins++;
+}
 
 // method that prints prints playerID, their Fierceness, Cardsleft, battles partaken in, amount of wins
 void Player::printStats() {
