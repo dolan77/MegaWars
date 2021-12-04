@@ -98,7 +98,7 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 	else {
 		// iterate through each player that has the max card
 		// NO I HAVE A MAP FOR A REASON
-		
+		CardToPlayer.clear();
 
 		for (auto IDitr = playersIDWithMaxCard.begin(); IDitr != playersIDWithMaxCard.end(); IDitr++) {
 

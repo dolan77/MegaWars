@@ -4,8 +4,8 @@ using namespace std;
 
 // adds a card to the pile
 void CardPile::add(Card c) {
-	
-	card_pile.push_back(c);
+	card_pile.insert(card_pile.begin(), c);
+	// card_pile.push_back(c);
 }
 
 
