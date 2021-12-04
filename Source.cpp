@@ -191,12 +191,16 @@ void Game(int &decks, int& numberOfPlayers) {
 	
 	// MAKE SURE TO FIND A WAY TO QUIT THE GAME IF EVERYONE LOSES WAR AT THE SAME TIME. IE. one card each.
 	while(game){
-
+		int playersWithNoCards = 0;
 		Card maxCard;
 		vector<int> playersIDWithMaxCard;
 
 		// iterates through the players to see if a single player has every single card.
 		for (auto player : players) {
+			if (player.getSizeOfPile() == 0) {
+				playersWithNoCards++;
+			}
+
 			if (player.getSizeOfPile() == sizeOfMegaPile) {
 				cout << "=============== WE HAVE A WINNER ===============" << endl;
 				cout << "player: " << player.getPlayerID() << " wins!" << endl;
@@ -205,7 +209,12 @@ void Game(int &decks, int& numberOfPlayers) {
 			}
 		}
 
-
+		if (playersWithNoCards == players.size()) {
+			cout << endl;
+			cout << "================ EVERYONE LOSES =======================" << endl;
+			game = false;
+			return;
+		}
 		cout << endl;
 		cout << "Battle: " << ++totalBattles << endl;
 		for (playerITR = players.begin(); playerITR != players.end(); playerITR++) {
@@ -215,8 +224,6 @@ void Game(int &decks, int& numberOfPlayers) {
 
 			// as long as a player can place a card, increment the player's battle counter
 			if (playerITR->getSizeOfPile() != 0) {
-
-				playerITR->incrementBattles();
 
 				// each key (player) can now be mapped to a value (Card)
 				// sorts with player 1 being bottom of map, player n being highest, CARDS ARE NOT SORTED
