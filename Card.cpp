@@ -20,6 +20,7 @@ void Card::setCard(char rank, char suit) {
 
 int Card::getValue() {
 
+	// depending on the current card rank, return values from the enum list
 	switch(rank){
 	case 'A':
 		return rankAce;
@@ -69,6 +70,7 @@ bool Card::operator<( const Card& otherCard) const {
 	int rank1 = 0;
 	int rank2 = 0;
 
+	// get the current value of the rank using the enum list.
 	switch (rank) {
 	case 'A':
 		rank1 = rankAce;
@@ -111,6 +113,7 @@ bool Card::operator<( const Card& otherCard) const {
 		break;
 	}
 
+	// get the otherCard's rank using the enum list
 	switch (otherCard.rank) {
 	case 'A':
 		rank2 = rankAce;
