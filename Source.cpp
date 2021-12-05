@@ -20,13 +20,6 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 
 	for (auto itr = CardToPlayer.begin(); itr != CardToPlayer.end(); itr++) {
 
-		//if (players[itr->first - 1].getSizeOfPile() == 0) {
-		//	playersWithNoCard++;
-		//}
-		// 
-		// maybe we can use this to check if a player has no more cards?
-		// want to avoid another for loop.
-
 		itr->second.showCard();
 
 		// determine which available cards has the highest value.
@@ -40,15 +33,6 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 		}
 
 	}
-
-	//if (playersWithNoCard == CardToPlayer.size()) {
-	//	for (auto itr = CardToPlayer.begin(); itr != CardToPlayer.end(); itr++) {
-	//		lostAndFound.add(itr->second);
-	//	}
-	//	CardToPlayer.clear();
-	//	playersIDWithMaxCard.clear();
-	//	return false;
-	//}
 
 	cout << endl;
 	
@@ -141,9 +125,7 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 // method that plays the Game of MegaWar
 void Game(int &decks, int& numberOfPlayers) {
 	bool game = true;
-
 	int totalBattles = 0;
-
 	vector<Player>::iterator playerITR;
 	
 	// initializing variables
@@ -176,11 +158,6 @@ void Game(int &decks, int& numberOfPlayers) {
 		players[megaDeck.getSizeOfPile() % numberOfPlayers].add(megaDeck.remove());
 	}
 
-	// this prints the stats
-	/*for (playerITR = players.begin(); playerITR != players.end(); playerITR++) {
-		playerITR->printStats();
-	}*/
-
 
 	// =================== THE ACTUAL GAME PART OF WAR =======================
 	// game ends when one player has every single card;
@@ -197,10 +174,12 @@ void Game(int &decks, int& numberOfPlayers) {
 
 		// iterates through the players to see if a single player has every single card.
 		for (auto player : players) {
+			// checks to see if the player has no cards, if so increment the variable
 			if (player.getSizeOfPile() == 0) {
 				playersWithNoCards++;
 			}
 
+			// checks to see if one player has all the cards, it means they are the winner
 			if (player.getSizeOfPile() == sizeOfMegaPile) {
 				cout << "=============== WE HAVE A WINNER ===============" << endl;
 				cout << "player: " << player.getPlayerID() << " wins!" << endl;
@@ -208,19 +187,25 @@ void Game(int &decks, int& numberOfPlayers) {
 				return;
 			}
 		}
+		// end of for loop
 
+		// checks to see if all players have no cards,  if so everyone loses
 		if (playersWithNoCards == players.size()) {
 			cout << endl;
 			cout << "================ EVERYONE LOSES =======================" << endl;
 			game = false;
 			return;
 		}
+
+
 		cout << endl;
 		cout << "Battle: " << ++totalBattles << endl;
+
+		
 		for (playerITR = players.begin(); playerITR != players.end(); playerITR++) {
+
 			// print the states before we remove the card
 			playerITR->printStats();
-
 
 			// as long as a player can place a card, increment the player's battle counter
 			if (playerITR->getSizeOfPile() != 0) {
@@ -233,30 +218,15 @@ void Game(int &decks, int& numberOfPlayers) {
 				warPile.add(CardToPlayer[playerITR->getPlayerID()]);
 
 			}
-
-
-			// cout << "Player: " << playerITR->getPlayerID() << " " << playerITR->getSizeOfPile() << endl;
 		}
+
 
 		// after making all eligible players place a card, start the WAR process
 		while (CardToPlayer.size() != 0) {
-			// cout << "initiating war" << endl;
-			// NEED TO TEST WHEN A PLAYER RUNS OUT OF CARDS!
 
 			War(CardToPlayer, maxCard, playersIDWithMaxCard, playerITR, players, warPile, lostAndFound);
-
-			// checks to see if the players in war lose at the same time. if so there can be no winner.
-			/*if (!(War(CardToPlayer, maxCard, playersIDWithMaxCard, playerITR, players, warPile, lostAndFound))) {
-				cout << endl;
-				cout << "================ EVERYONE LOSES =======================" << endl;
-				game = false;
-				return;
-			}*/
 		}
-		
 
-
-		
 	}
 }
 
