@@ -3,27 +3,32 @@
 
 #include <iostream>
 class Card {
-private:
-	char rank;
-	char suit;
-	// char suits[4] = { 'S', 'C', 'H', 'D' };
-	// char ranks[13] = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' };
-
 public:
+
 	enum ranks {
-		rankAce = 1, rankTwo, rankThree, rankFour, rankFive, rankSix, rankSeven, rankEight, rankNine,
+		rankEmpty, rankAce, rankTwo, rankThree, rankFour, rankFive, rankSix, rankSeven, rankEight, rankNine,
 		rankTen, rankJack, rankQueen, rankKing
 	};
 	enum suits {
-		suitSpade, suitClover, suitHeart, suitDiamond
+		suitEmpty, suitSpade, suitClover, suitHeart, suitDiamond
 	};
 
 	Card();
-	Card(char, char);
-	void setCard(char, char);
+	Card(ranks, suits);
+	void setCard(ranks, suits);
 	int getValue();
 	void showCard();
-	bool operator<( const Card&) const;
+	bool operator<(const Card&) const;
+
+private:
+
+	ranks rank;
+	suits suit;
+
+	// char suits[4] = { 'S', 'C', 'H', 'D' };
+	// char ranks[13] = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' };
+
+
 };
 
 

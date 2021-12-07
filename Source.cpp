@@ -15,7 +15,6 @@ using namespace std;
 void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWithMaxCard, vector<Player>::iterator& playerITR,
 	vector<Player>& players, WarPile& warPile, LostAndFoundPile& lostAndFound) {
 
-	int playersWithNoCard = 0;
 	cout << "cards in play: ";
 
 	for (auto itr = CardToPlayer.begin(); itr != CardToPlayer.end(); itr++) {
@@ -81,7 +80,7 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 	// there are multiple players with the maxCard
 	else {
 		// iterate through each player that has the max card
-		// NO I HAVE A MAP FOR A REASON
+		// clear CardToPlayer since we only want those in WAR to be participating.
 		CardToPlayer.clear();
 
 		for (auto IDitr = playersIDWithMaxCard.begin(); IDitr != playersIDWithMaxCard.end(); IDitr++) {
@@ -106,13 +105,7 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 						CardToPlayer[playerITR->getPlayerID()] = playerITR->remove();
 						warPile.add(CardToPlayer[playerITR->getPlayerID()]);
 					}
-
-					// check to see if everyone has no cards in their pile.
-					else {
-						playersWithNoCard++;
-					}
 				}
-
 			}
 		}
 		// end of the for loops

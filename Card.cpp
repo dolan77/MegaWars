@@ -1,52 +1,52 @@
 #include "Card.h"
-
+#include <string>
 
 using namespace std;
 
 Card::Card() {
-	rank = 'x';
-	suit = 'x';
+	rank = rankEmpty;
+	suit = suitEmpty;
 }
 
-Card::Card(char rank, char suit) {
-	this->rank = rank;
-	this->suit = suit;
+Card::Card(ranks r, suits s) {
+	this->rank = ranks(r);
+	this->suit = suits(s);
 }
 
-void Card::setCard(char rank, char suit) {
-	this->rank = rank;
-	this->suit = suit;
+void Card::setCard(ranks r, suits s) {
+	rank = ranks(r);
+	suit = suits(s);
 }
 
 int Card::getValue() {
 
 	// depending on the current card rank, return values from the enum list
 	switch(rank){
-	case 'A':
+	case rankAce:
 		return rankAce;
-	case '2':
+	case rankTwo:
 		return rankTwo;
-	case '3':
+	case rankThree:
 		return rankThree;
-	case '4':
+	case rankFour:
 		return rankFour;
-	case '5':
+	case rankFive:
 		return rankFive;
-	case '6':
+	case rankSix:
 		return rankSix;
-	case '7':
+	case rankSeven:
 		return rankSeven;
-	case '8':
+	case rankEight:
 		return rankEight;
-	case '9':
+	case rankNine:
 		return rankNine;
-	case 'T':
+	case rankTen:
 		return rankTen;
-	case 'J':
+	case rankJack:
 		return rankJack;
-	case 'Q':
+	case rankQueen:
 		return rankQueen;
-	case 'K':
+	case rankKing:
 		return rankKing;
 
 	}
@@ -58,12 +58,82 @@ int Card::getValue() {
 }
 
 void Card::showCard() {
-	if (rank == 'T') {
+	string output;
+
+	// compensated by adding int values to get the ascii value of the characters to print to the console.
+	switch (rank) {
+	case rankAce:
+		output += (rankAce) + 64;
+		break;
+	case rankTwo:
+		output += (rankTwo) + 48;
+		break;
+	case rankThree:
+		output += (rankThree) + 48;
+		break;
+	case rankFour:
+		output += (rankFour) + 48;
+		break;
+	case rankFive:
+		output += (rankFive) + 48;
+		break;
+	case rankSix:
+		output += (rankSix) + 48;
+		break;
+	case rankSeven:
+		output += (rankSeven) + 48;
+		break;
+	case rankEight:
+		output += (rankEight) + 48;
+		break;
+	case rankNine:
+		output += (rankNine) + 48;
+		break;
+	case rankTen:
+		output += (rankTen) + 39;
+		output += (rankTen) + 38;
+		break;
+	case rankJack:
+		output += (rankJack) + 64;
+		break;
+	case rankQueen:
+		output += (rankQueen) + 69;
+		break;
+	case rankKing:
+		output += (rankKing) + 62;
+		break;
+	case rankEmpty:
+		output += 'x';
+		break;
+	}
+
+	switch (suit) {
+	case suitDiamond:
+		output += 'D';
+		break;
+	case suitClover:
+		output += 'C';
+		break;
+	case suitHeart:
+		output += 'H';
+		break;
+	case suitSpade:
+		output += 'S';
+		break;
+	case suitEmpty:
+		output += 'x';
+		break;
+	}
+
+	cout << output << " ";
+
+
+	/*if (rank == 'T') {
 		cout << "10" << suit << " ";
 	}
 	else {
 		cout << rank << suit << " ";
-	}
+	}*/
 }
 
 bool Card::operator<( const Card& otherCard) const {
@@ -72,86 +142,86 @@ bool Card::operator<( const Card& otherCard) const {
 
 	// get the current value of the rank using the enum list.
 	switch (rank) {
-	case 'A':
+	case rankAce:
 		rank1 = rankAce;
 		break;
-	case '2':
+	case rankTwo:
 		rank1 = rankTwo;
 		break;
-	case '3':
+	case rankThree:
 		rank1 = rankThree;
 		break;
-	case '4':
+	case rankFour:
 		rank1 = rankFour;
 		break;
-	case '5':
+	case rankFive:
 		rank1 = rankFive;
 		break;
-	case '6':
+	case rankSix:
 		rank1 = rankSix;
 		break;
-	case '7':
+	case rankSeven:
 		rank1 = rankSeven;
 		break;
-	case '8':
+	case rankEight:
 		rank1 = rankEight;
 		break;
-	case '9':
+	case rankNine:
 		rank1 = rankNine;
 		break;
-	case 'T':
+	case rankTen:
 		rank1 = rankTen;
 		break;
-	case 'J':
+	case rankJack:
 		rank1 = rankJack;
 		break;
-	case 'Q':
+	case rankQueen:
 		rank1 = rankQueen;
 		break;
-	case 'K':
+	case rankKing:
 		rank1 = rankKing;
 		break;
 	}
 
 	// get the otherCard's rank using the enum list
 	switch (otherCard.rank) {
-	case 'A':
+	case rankAce:
 		rank2 = rankAce;
 		break;
-	case '2':
+	case rankTwo:
 		rank2 = rankTwo;
 		break;
-	case '3':
+	case rankThree:
 		rank2 = rankThree;
 		break;
-	case '4':
+	case rankFour:
 		rank2 = rankFour;
 		break;
-	case '5':
+	case rankFive:
 		rank2 = rankFive;
 		break;
-	case '6':
+	case rankSix:
 		rank2 = rankSix;
 		break;
-	case '7':
+	case rankSeven:
 		rank2 = rankSeven;
 		break;
-	case '8':
+	case rankEight:
 		rank2 = rankEight;
 		break;
-	case '9':
+	case rankNine:
 		rank2 = rankNine;
 		break;
-	case 'T':
+	case rankTen:
 		rank2 = rankTen;
 		break;
-	case 'J':
+	case rankJack:
 		rank2 = rankJack;
 		break;
-	case 'Q':
+	case rankQueen:
 		rank2 = rankQueen;
 		break;
-	case 'K':
+	case rankKing:
 		rank2 = rankKing;
 		break;
 	}
