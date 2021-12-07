@@ -51,7 +51,7 @@ void Player::incrementWin() {
 // method that prints prints playerID, their Fierceness, Cardsleft, battles partaken in, amount of wins
 void Player::printStats() {
 	cout << "Player " << playerID 
-		<< " : Fierceness = " << getFierceness() 
+		<< ": Fierceness = " << getFierceness() 
 		<< "\t" << "Cards = "  << card_pile.size() 
 		<< "\t" << "Battles = " << battles 
 		<< "\t" << "Won = " << wins << endl;

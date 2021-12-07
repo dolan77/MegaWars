@@ -42,7 +42,6 @@ void War(map<int, Card>& CardToPlayer, Card& maxCard, vector<int>& playersIDWith
 			playersIDWithMaxCard.push_back(itr.first);
 		}
 	}
-
 	// if there is only 1 player with the maxCard.
 	if (playersIDWithMaxCard.size() == 1) {
 

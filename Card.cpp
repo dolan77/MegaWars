@@ -23,32 +23,33 @@ int Card::getValue() {
 	// depending on the current card rank, return values from the enum list
 	switch(rank){
 	case rankAce:
-		return rankAce;
+		return int(rankAce);
 	case rankTwo:
-		return rankTwo;
+		return int(rankTwo);
 	case rankThree:
-		return rankThree;
+		return int(rankThree);
 	case rankFour:
-		return rankFour;
+		return int(rankFour);
 	case rankFive:
-		return rankFive;
+		return int(rankFive);
 	case rankSix:
-		return rankSix;
+		return int(rankSix);
 	case rankSeven:
-		return rankSeven;
+		return int(rankSeven);
 	case rankEight:
-		return rankEight;
+		return int(rankEight);
 	case rankNine:
-		return rankNine;
+		return int(rankNine);
 	case rankTen:
-		return rankTen;
+		return int(rankTen);
 	case rankJack:
-		return rankJack;
+		return int(rankJack);
 	case rankQueen:
-		return rankQueen;
+		return int(rankQueen);
 	case rankKing:
-		return rankKing;
-
+		return int(rankKing);
+	case rankEmpty:
+		return int(rankEmpty);
 	}
 
 
@@ -94,7 +95,7 @@ void Card::showCard() {
 		output += (rankTen) + 38;
 		break;
 	case rankJack:
-		output += (rankJack) + 64;
+		output += (rankJack) + 63;
 		break;
 	case rankQueen:
 		output += (rankQueen) + 69;

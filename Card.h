@@ -24,16 +24,7 @@ private:
 
 	ranks rank;
 	suits suit;
-
-	// char suits[4] = { 'S', 'C', 'H', 'D' };
-	// char ranks[13] = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' };
-
-
 };
-
-
-
-
 
 #endif // !CARD_H
 
