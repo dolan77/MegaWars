@@ -233,9 +233,11 @@ bool Card::operator<( const Card& otherCard) const {
 	// if the distnace of the current card is not less than the distance of the other card, return false.
 	// int rank1 = distance(ranks, find(begin(ranks), end(ranks), rank) + 1);
 	// int rank2 = distance(ranks, find(begin(ranks), end(ranks), otherCard.rank) + 1);
-	if ( !( rank1 < rank2) ) {
-		return false;
-	}
+	// 
+	return rank1 < rank2 ? true : false;
 
-	return true;
+	//if ( !( rank1 < rank2) ) {
+	//	return false;
+	//}
+	//return true;
 }
