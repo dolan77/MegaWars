@@ -206,6 +206,7 @@ void Game(int &decks, int& numberOfPlayers) {
 				// sorts with player 1 being bottom of map, player n being highest, CARDS ARE NOT SORTED
 				// as long as the player has cards, add them to the map to keep track of who's card beings to which player
 				// add that card to the warPile so we can give the winner all the cards
+				playerITR->incrementBattles();
 				CardToPlayer.insert(pair <int, Card>(playerITR->getPlayerID(), playerITR->remove()));
 				warPile.add(CardToPlayer[playerITR->getPlayerID()]);
 
